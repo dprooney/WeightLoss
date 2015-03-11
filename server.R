@@ -15,11 +15,12 @@ shinyServer(
         }
         mod <- lm(Loss~Deficit, procdf)
 
-        newdef <- seq(min(procdf$Deficit),max(procdf$Deficit),length.out=100)
+        newdef <- seq(min(wldata$Deficit),max(wldata$Deficit),length.out=100)
         preds <- predict(mod, newdata=data.frame(Deficit=newdef), interval='confidence') 
         
         plot(procdf$Deficit,procdf$Loss,type="n",xlab="Caloric Deficit (kcal)",
-             ylab = "Weight Loss (lbs)" ,ylim = c(1.1*min(wldata$Loss),1.1*max(wldata$Loss)) )
+             ylab = "Weight Loss (lbs)",xlim = c(1.1*min(wldata$Deficit),1.1*max(wldata$Deficit)),
+             ylim = c(1.1*min(wldata$Loss),1.1*max(wldata$Loss)) )
 
         polygon(c(rev(newdef),newdef),c(rev(preds[,3]),preds[,2]),col='grey80',border=NA)
         points(procdf$Deficit,procdf$Loss,col="blue" )
