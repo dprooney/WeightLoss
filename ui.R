@@ -1,13 +1,17 @@
 shinyUI(pageWithSidebar(
-  headerPanel("Caloric Deficit and Weight Loss",p("what")),
+ 
+  headerPanel("Caloric Deficit and Weight Loss",),
+  
   sidebarPanel(
     numericInput("defspan", "Number of days to average caloric deficit:",1,min=1),
     numericInput("lossspan", "Number of days to average weight loss:",1,min=1),
     numericInput("lag", "Time lag in days between intake and weight change:",0,min=0)
   ),
+  
   mainPanel(
     tabsetPanel(
-      tabPanel("Documentation",
+  
+    tabPanel("Documentation",
         br(),
         strong("A project for JHU's ", em("Developing Data Products"), " Coursera course"),
         br(),br(),
@@ -34,8 +38,8 @@ shinyUI(pageWithSidebar(
           a(href = "https://github.com/dprooney/WeightLoss",target = "_blank",
             "the github repository.")
         )
-        
       ),
+
       tabPanel("Results",
         plotOutput('fit'),
         br(),
@@ -47,10 +51,11 @@ shinyUI(pageWithSidebar(
         br(),
         strong("R-squared:"),
         textOutput('result3')
-        
-        ),
+      ),
+      
       tabPanel("Raw Data",
-        plotOutput('rawdata'))
+        plotOutput('rawdata')
+      )
     )
   )
 ))
